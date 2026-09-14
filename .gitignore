@@ -1,0 +1,24 @@
+# Root gitignore
+
+# Ignore frontend build files and dependencies
+frontend/build/
+frontend/.dart_tool/
+frontend/.flutter-plugins
+frontend/.flutter-plugins-dependencies
+frontend/.packages
+frontend/.pub-cache/
+frontend/.pub/
+frontend/ios/Pods/
+frontend/.idea/
+frontend/*.iml
+frontend/.vscode/
+
+# Ignore backend dependencies
+backend/node_modules/
+backend/.env
+backend/npm-debug.log
+backend/yarn-error.log
+
+# Mac specific
+.DS_Store
+backend/serviceAccountKey.json
