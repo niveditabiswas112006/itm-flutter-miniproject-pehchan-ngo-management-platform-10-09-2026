@@ -13,40 +13,73 @@ final authStateProvider = Provider<AppUser?>((ref) {
 });
 
 class AuthNotifier extends Notifier<AppUser?> {
+  // For local testing without backend, we store credentials in memory
+  static final List<Map<String, dynamic>> _mockUsers = [
+    {
+      'email': 'volunteer@pehchan.org',
+      'password': 'password123',
+      'name': 'Demo Volunteer',
+      'role': 'volunteer',
+    },
+  ];
+
   @override
   AppUser? build() {
     return null;
   }
 
   Future<void> login(String email, String password) async {
+    // Simulate network delay
+    await Future.delayed(const Duration(milliseconds: 500));
+
     try {
-      final response = await ApiClient.get('/users');
-      final usersList = response['data'] as List;
-      
-      final userMap = usersList.firstWhere(
-        (u) => u['email'] == email,
-        orElse: () => null,
+      // First try to match mock users
+      final userMap = _mockUsers.firstWhere(
+        (u) => u['email'] == email && u['password'] == password,
+        orElse: () => <String, dynamic>{},
       );
 
-      if (userMap != null) {
+      if (userMap.isNotEmpty) {
         state = AppUser(
-          id: userMap['id'] ?? '',
+          id: DateTime.now().millisecondsSinceEpoch.toString(),
           name: userMap['name'] ?? '',
           email: userMap['email'] ?? '',
-          phone: userMap['phone'] ?? '',
-          profileImageUrl: userMap['profileImageUrl'] ?? '',
+          phone: '',
+          profileImageUrl: '',
           role: _parseRole(userMap['role']),
-          city: userMap['city'] ?? '',
-          bio: userMap['bio'] ?? '',
-          createdAt: DateTime.tryParse(userMap['createdAt']?.toString() ?? '') ?? DateTime.now(),
+          city: '',
+          bio: '',
+          createdAt: DateTime.now(),
         );
-      } else {
-        throw Exception('User not found');
+        return;
       }
+      
+      throw Exception('User not found or incorrect password');
     } catch (e) {
       print('Login error: $e');
       throw Exception('Login failed: $e');
     }
+  }
+
+  Future<void> register(String name, String email, String password, String role) async {
+    // Simulate network delay
+    await Future.delayed(const Duration(milliseconds: 500));
+    
+    // Check if user exists
+    final exists = _mockUsers.any((u) => u['email'] == email);
+    if (exists) {
+      throw Exception('Email already in use');
+    }
+
+    _mockUsers.add({
+      'email': email,
+      'password': password,
+      'name': name,
+      'role': role.toLowerCase(),
+    });
+
+    // Auto login after registration
+    await login(email, password);
   }
 
   void logout() {

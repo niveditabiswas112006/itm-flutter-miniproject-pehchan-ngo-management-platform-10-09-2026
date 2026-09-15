@@ -12,6 +12,8 @@ import '../../features/screens/dashboards/ngo_dashboard.dart';
 import '../../features/screens/dashboards/admin_dashboard.dart';
 import '../../features/screens/certificates/certificate_verifier_screen.dart';
 import '../../features/screens/events/create_event_screen.dart';
+import '../../features/screens/auth/sign_in_screen.dart';
+import '../../features/screens/auth/register_screen.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -73,6 +75,14 @@ final GoRouter appRouter = GoRouter(
         final id = state.pathParameters['id'] ?? '';
         return CertificateVerifierScreen(certificateId: id);
       },
+    ),
+    GoRoute(
+      path: '/sign-in',
+      builder: (context, state) => const SignInScreen(),
+    ),
+    GoRoute(
+      path: '/register',
+      builder: (context, state) => const RegisterScreen(),
     ),
   ],
 );

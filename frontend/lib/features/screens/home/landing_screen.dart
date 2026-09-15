@@ -122,10 +122,27 @@ class _LandingScreenState extends ConsumerState<LandingScreen> {
                 _buildNavTextButton('Get in Touch', _contactKey),
               ],
             ),
-          TextButton(
-            onPressed: () => context.push('/verify'),
-            style: TextButton.styleFrom(foregroundColor: AppTheme.emerald),
-            child: const Text('Verify Certificate', style: TextStyle(fontWeight: FontWeight.bold)),
+          Row(
+            children: [
+              TextButton(
+                onPressed: () => context.push('/verify'),
+                style: TextButton.styleFrom(foregroundColor: AppTheme.emerald),
+                child: const Text('Verify Certificate', style: TextStyle(fontWeight: FontWeight.bold)),
+              ),
+              const SizedBox(width: 16),
+              ElevatedButton(
+                onPressed: () => context.push('/sign-in'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppTheme.emerald,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                child: const Text('Sign In', style: TextStyle(fontWeight: FontWeight.bold)),
+              ),
+            ],
           )
         ],
       ),
@@ -270,7 +287,7 @@ class _LandingScreenState extends ConsumerState<LandingScreen> {
           
           LayoutBuilder(
             builder: (context, constraints) {
-              if (constraints.maxWidth > 900) {
+              if (constraints.maxWidth > 1050) {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
