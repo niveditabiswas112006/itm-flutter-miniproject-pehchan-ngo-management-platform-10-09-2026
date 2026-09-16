@@ -22,3 +22,4 @@ backend/yarn-error.log
 # Mac specific
 .DS_Store
 backend/serviceAccountKey.json
+.rocketride/

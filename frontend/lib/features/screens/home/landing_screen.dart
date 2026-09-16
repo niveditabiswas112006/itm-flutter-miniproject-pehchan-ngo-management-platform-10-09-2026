@@ -759,8 +759,11 @@ class _LandingScreenState extends ConsumerState<LandingScreen> {
           const SizedBox(height: 32),
           Divider(color: Colors.grey.shade200),
           const SizedBox(height: 24),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 8,
+            runSpacing: 4,
             children: [
               Text('Urgent? Email us at:', style: TextStyle(color: Colors.grey.shade600, fontWeight: FontWeight.w500)),
               Text('bucolicmobilesolutions@gmail.com', style: TextStyle(color: AppTheme.emerald, fontWeight: FontWeight.bold)),

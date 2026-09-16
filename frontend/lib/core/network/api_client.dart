@@ -1,15 +1,18 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
 
 class ApiClient {
   // Use 10.0.2.2 for Android emulator, localhost for Web/iOS/Desktop
   static String get baseUrl {
-    if (kIsWeb) return 'http://localhost:5001/api';
-    if (defaultTargetPlatform == TargetPlatform.android) {
-      return 'http://10.0.2.2:5001/api';
-    }
-    return 'http://localhost:5001/api';
+    if (kIsWeb) return 'http://localhost:5002/api';
+    
+    // For Android emulator
+    if (Platform.isAndroid) return 'http://10.0.2.2:5002/api';
+    
+    // For iOS simulator and other platforms
+    return 'http://localhost:5002/api';
   }
 
   static Future<dynamic> get(String endpoint) async {
