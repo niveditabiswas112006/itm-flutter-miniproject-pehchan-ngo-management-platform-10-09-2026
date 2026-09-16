@@ -10,7 +10,8 @@ A comprehensive NGO platform where organizations create social events (tree plan
 - Money & material donation tracking
 
 ## Tech Stack
-- Flutter
+- Frontend: Flutter
+- Backend: Node.js, Express, Firebase Admin
 
 ## Tags
 `NGO` `Social Impact` `Volunteer Management` `Donations` `Certificates`
